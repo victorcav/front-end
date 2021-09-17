@@ -1,49 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Controle de Despesas</title>
-</head>
-<body>
+  </head>
+  <body>
     <h2>Controle de Despesas</h2>
 
     <div class="container">
-        <h4>Saldo Atual</h4>
-        <h1>R$ 0.00</h1>
+      <h4>Saldo Atual</h4>
+      <h1 id="balance" class="balance">R$ 0.00</h1>
 
+      <div>
+        <h4>RECEITAS</h4>
+        <p id="money-plus" class="money plus">+ R$0.00</p>
+        <h4>DESPESAS</h4>
+        <p id="money-minus" class="money minus">- R$ 0.00</p>
+      </div>
+
+      <h2>Transações</h2>
+
+      <ul id="transacions" clas="transactions">
+        <li>Coffe</li>
+        <li>Tea</li>
+        <li>Milk</li>
+      </ul>
+
+      <h3>Adicionar transação</h3>
+
+      <form>
         <div>
-            <h4>RECEITAS</h4>
-            <p>R$ 0.00</p>
-            <h4>DESPESAS</h4>
-            <p>R$ 0.00</p>
+          <label for="text">Nome</label>
+          <input type="text" />
         </div>
 
-        <h2>Transações</h2>
+        <div>
+          <label for="text">Valor</label>
+          <input type="text" />
+        </div>
 
-        <ul>
-            <li>Coffe</li>
-            <li>Tea</li>
-            <li>Milk</li>
-        </ul>
-
-        <h3>Adicionar transação</h3>
-            
-        <form>
-            <div>
-                <label for="text">Nome</label>
-                <input type="text">
-            </div>
-
-            <div>
-                <label for="text">Valor</label>
-                <input type="text">
-            </div>
-
-            <button>Adicionar</button>
-        </form>
+        <button>Adicionar</button>
+      </form>
     </div>
-    
-</body>
+  </body>
 </html>
