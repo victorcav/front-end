@@ -33,15 +33,21 @@
       <form>
         <div>
           <label for="text">Nome</label>
-          <input type="text" />
+          <input
+            autofocus
+            type="text"
+            id="text"
+            placeholder="Nome da transação"
+          />
         </div>
 
         <div>
-          <label for="text">Valor</label>
-          <input type="text" />
+          <label for="amount">Valor</label>
+          <small>(negativo - despesas, positivo - receitas)</small>
+          <input type="number" id="amount" placeholder="Valor da transação" />
         </div>
 
-        <button>Adicionar</button>
+        <button class="btn">Adicionar</button>
       </form>
     </div>
   </body>
