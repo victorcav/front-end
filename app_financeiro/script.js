@@ -12,41 +12,54 @@ const inputTransactionName = document.querySelector("#text");
 
 const inputTransactionAmount = document.querySelector("#amount");
 
+const formulario = document.querySelector("#form");
+
 // Declaraccao de um objeto literal:
 
-const dummyTransactions = [];
+let dummyTransactions = [];
+
+// Métodos para remover uma transacao da lista:
+
+const removeTransaction = (ID) => {
+  dummyTransactions = dummyTransactions.filter(
+    (transaction) => transaction.id !== ID
+  );
+  console.log(dummyTransactions);
+  init();
+};
+
 const addTransactionIntoDom = (transaction) => {
   const operator = transaction.amount < 0 ? "-" : "+"; // if ternario ou if linha
   const amountWithoutOperator = Math.abs(transaction.amount);
   const CSSClass = transaction.amount < 0 ? "minus" : "plus";
   const li = document.createElement("li");
   li.classList.add(CSSClass);
-  li.innerHTML = ` 
-            ${transaction.name} <span> ${operator} R$  ${amountWithoutOperator} </span> 
-                                    <button class="delete-btn">x</button> `;
+  li.innerHTML = `     
+                    ${transaction.name} <span>${operator} R$ ${amountWithoutOperator}</span>
+                    <button class="delete-btn" onClick="removeTransaction(${transaction.id})">x</button> `;
   transactionsUl.append(li);
 };
 
 /* Metodo que ira retornar todo os valores somados de receitas e despesas */
 
 const updateBalanceValues = () => {
-  // pegar todos os valores do objeto dummy
+  // Pegar todos os valores do objeto dummy
   const transactionAmounts = dummyTransactions.map(
     (transaction) => transaction.amount
   );
 
-  // somatorio dos valores retornados
+  // Somatorio dos valores retornados:
   const total = transactionAmounts
     .reduce((acumulator, transaction) => acumulator + transaction, 0)
     .toFixed(2);
 
-  // retorna todas as receitas
+  // Retorna todas as receitas:
   const income = transactionAmounts
     .filter((values) => values > 0)
     .reduce((acumulator, values) => acumulator + values, 0)
     .toFixed(2);
 
-  // retorna todas as despesas
+  // Retorna todas as despesas:
   const expense = transactionAmounts
     .filter((values) => values < 0)
     .reduce((acumulator, values) => acumulator - values, 0)
@@ -57,37 +70,40 @@ const updateBalanceValues = () => {
   moneyMinusDisplay.textContent = `R$ ${expense}`;
 };
 const init = () => {
-  // inicializa todas as funções da pagina
+  // Inicializa todas as funções da pagina:
   transactionsUl.innerHTML = "";
   dummyTransactions.forEach(addTransactionIntoDom);
   updateBalanceValues();
+  inputTransactionName.value = "";
+  inputTransactionAmount.value = "";
 };
 
 init();
-//  funcao que gera ID
+
+//  Funcao que gera ID:
+
 const generateId = () => Math.round(Math.random() * 1000);
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
 
+  // Adicionado os componente a uma variavel para mellhor a escrita:
   const transactionName = inputTransactionName.value.trim();
-  const transactionAmout = inputTransactionAmount.value.trim();
+  const transactionAmount = inputTransactionAmount.value.trim();
 
-  if (transactionName === "" && transactionAmout === "") {
+  if (transactionName === "" && transactionAmount === "") {
     alert("Informe os campos valor e nome da transação");
     return;
   }
 
+  // Cria um objeto para fazer a insercao no array:
   const transaction = {
     id: generateId(),
     name: transactionName,
-    amount: transactionAmout,
+    amount: Number(transactionAmount),
   };
 
+  // Adiciona na lista na ultima posicao:
   dummyTransactions.push(transaction);
   init();
-  updateLocalStorage;
-
-  transactionName.value = "";
-  transactionAmout.value = "";
 });
